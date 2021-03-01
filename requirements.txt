@@ -1,5 +1,5 @@
 pandas
-dask
+dask[complete]
 pyarrow
 jupyterlab
 scikit-learn
