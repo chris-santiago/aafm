@@ -3,3 +3,5 @@ dask[complete]
 pyarrow
 jupyterlab
 scikit-learn
+xlrd
+openpyxl
