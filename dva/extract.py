@@ -1,7 +1,8 @@
-import pandas as pd
-import dask.dataframe as dd
-from dask.diagnostics import ProgressBar
 import pathlib
+
+import dask.dataframe as dd
+import pandas as pd
+from dask.diagnostics import ProgressBar
 
 HERE = pathlib.Path(__file__).parent
 PROJECT_DIR = HERE.parent

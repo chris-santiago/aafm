@@ -1,8 +1,7 @@
-from typing import Union, Dict
+from typing import Dict, Union
 
-import pandas as pd
 import numpy as np
-
+import pandas as pd
 
 data = pd.read_csv('data/FundDatawithMonthlyPrices.csv')
 
@@ -35,14 +34,6 @@ def get_category_means(dataset: pd.DataFrame) -> Dict[str, pd.Series]:
         # cat_means[cat] = pd.DataFrame(prices.mean()).T
         cat_means[cat] = prices.mean()
     return cat_means
-
-
-# def fill_na(dataset: pd.DataFrame, means: Dict) -> pd.DataFrame:
-#     df = dataset.copy()
-#     for cat, fill_vals in means.items():
-#         mask = df['aafmCategory'] == cat
-#         df[mask].fillna(fill_vals, inplace=True)
-#     return df
 
 
 def fill_series(na_series: pd.Series, fill_series: pd.Series) -> pd.Series:
