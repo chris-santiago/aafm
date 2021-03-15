@@ -1,7 +1,6 @@
 import pandas as pd
 
 prices = pd.read_parquet('./data/fund_prices.parq')
-fund_series = prices['fundSeries'].unique()
 
 
 def get_monthly_prices(data: pd.DataFrame) -> pd.DataFrame:
