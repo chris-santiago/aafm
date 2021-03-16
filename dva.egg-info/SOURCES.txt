@@ -1,7 +1,9 @@
 README.md
 setup.py
 dva/__init__.py
+dva/clean.py
 dva/extract.py
+dva/fund_returns.py
 dva.egg-info/PKG-INFO
 dva.egg-info/SOURCES.txt
 dva.egg-info/dependency_links.txt

@@ -4,3 +4,4 @@ pyarrow
 jupyterlab
 scikit-learn
 seaborn
+keras
