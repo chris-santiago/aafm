@@ -15,8 +15,7 @@ COLS = {
     ],
     'fund_data': [
         'fundRUN', 'fundName', 'fundSeries', 'bloombergCode', 'APV', 'aafmCategory', 'svsCategory',
-        'svsCategoryId', 'currency', 'fixedRemuneration', 'variableRemuneration',
-        'investmentCommission', 'rescuedCommission'
+        'svsCategoryId', 'currency'
     ],
     'fund_flows': [
         'fundRUN', 'fundName', 'fundSeries', 'bloombergCode', 'netPatrimony', 'providedFlow',
