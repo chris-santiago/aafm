@@ -4,4 +4,5 @@ pyarrow
 jupyterlab
 scikit-learn
 seaborn
+tensorflow
 keras
