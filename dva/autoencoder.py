@@ -1,19 +1,22 @@
+from typing import Tuple
+
 import tensorflow as tf
 from tensorflow.keras import layers
 from tensorflow.keras.models import Model
 
 
 class Autoencoder(Model):
-    def __init__(self, compressed_dim):
+    def __init__(self, nodes: Tuple[int]):
         super().__init__()
-        self.n_dim = compressed_dim
+        self.nodes = nodes
         self.encoder = tf.keras.Sequential([
-            layers.InputLayer(input_shape=(64,)),
-            layers.Dense(32, activation='relu'),
-            layers.Dense(self.n_dim, activation='relu')
+            layers.Dense(self.nodes[0], activation='relu'),
+            # layers.Dropout(0.2),
+            layers.Dense(self.nodes[1], activation='relu')
         ])
         self.decoder = tf.keras.Sequential([
-            layers.Dense(32, activation='relu'),
+            layers.Dense(self.nodes[0], activation='relu'),
+            # layers.Dropout(0.2),
             layers.Dense(64, activation='sigmoid')
         ])
 
