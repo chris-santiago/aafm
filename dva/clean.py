@@ -1,7 +1,45 @@
-from typing import Dict
+from typing import Dict, List
 
 import pandas as pd
 import pathlib
+
+NEW_CATEGORIES = {
+    'International Equity': [
+        'Accionario America Latina', 'Accionario Asia Pacifico', 'Accionario Brasil',
+        'Accionario Desarrollado', 'Accionario EEUU', 'Accionario Europa Desarrollado',
+        'Accionario Pais', 'Accionario Países MILA',
+    ],
+    'Emerging Equity': [
+        'Accionario Asia Emergente', 'Accionario Emergente', 'Accionario Europa Emergente',
+    ],
+    'Domestic Equity': [
+        'Accionario Nacional Large CAP', 'Accionario Nacional Otros', 'Accionario Sectorial',
+    ],
+    'Balanced, Conservative': ['Balanceado Conservador'],
+    'Balanced, Moderate': ['Balanceado Moderado'],
+    'Balanced, Aggressive': ['Balanceado Agresivo'],
+    'International Bond, < 365': [
+        'Fondos de Deuda < 365 Dias Internacional',
+        'Fondos de Deuda < 90 Dias Internacional, Dolar',
+    ],
+    'Domestic Bond, < 365': [
+        'Fondos de Deuda < 365 Dias Nacional en UF', 'Fondos de Deuda < 365 Dias Nacional en pesos',
+        'Fondos de Deuda < 90 Dias Nacional',
+        'Inversionistas Calificados Accionario Nacional',
+    ],
+    'International Bond, > 365': [
+        'Fondos de Deuda > 365 Dias Internacional, Mercados Emergentes',
+        'Fondos de Deuda > 365 Dias Internacional, Mercados Internacionales',
+
+    ],
+    'Domestic Bond, > 365': [
+        'Fondos de Deuda > 365 Dias Nacional, Inversion UF > 3 años y =<5',
+        'Fondos de Deuda > 365 Dias Nacional, Inversion en UF > 5 años',
+        'Fondos de Deuda > 365 Dias Nacional, Inversión en Pesos',
+        'Fondos de Deuda > 365 Dias Nacional, Inversión en UF < 3 años',
+        'Fondos de Deuda > 365 Dias Orig. Flex', 'Inversionistas Calificados Títulos de Deuda',
+    ]
+}
 
 
 def get_monthly_prices(data: pd.DataFrame) -> pd.DataFrame:
@@ -25,6 +63,16 @@ def get_longest_series(data: pd.DataFrame, transpose=True) -> pd.DataFrame:
     return pd.concat(longest, axis=1)
 
 
+def filter_min_history(data: pd.DataFrame, min_periods: int) -> pd.DataFrame:
+    mask = data.iloc[:, -min_periods:].notnull().sum(1) == min_periods
+    return data[mask]
+
+
+def filter_constant_prices(data: pd.DataFrame) -> pd.DataFrame:
+    mask = data.iloc[:, 8:].apply(lambda x: x.nunique(), axis=1) != 1
+    return data[mask]
+
+
 def get_longest_series2(df: pd.DataFrame) -> pd.DataFrame:
     """For use on FundDatawithMonthlyPrices_v2_raw.csv"""
     longest = []
@@ -39,6 +87,7 @@ def get_longest_series2(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def get_most_invest_series(data: pd.DataFrame) -> pd.MultiIndex:
+    """For use on FundDatawithMonthlyPrices_v2_raw.csv"""
     aum = data.copy()
     aum.set_index('fecha', inplace=True)
     aum.index = pd.to_datetime(aum.index)
@@ -53,10 +102,31 @@ def get_most_invest_series(data: pd.DataFrame) -> pd.MultiIndex:
     return pd.MultiIndex.from_tuples([*zip(max_aum['fundName'], max_aum['fundSeries'])])
 
 
-if __name__ == '__main__':
-    here = pathlib.Path(__file__).parent
-    project = here.parent
-    file_path = project.joinpath('data', 'fund_prices.parq')
+def lookup(val: str, cats: Dict[str, List[str]]) -> str:
+    try:
+        res = [x for x in cats.keys() if val in cats[x]]
+        return res[0]
+    except IndexError:
+        print(f'{val} not in lookup.')
+
+
+def clean_from_parquet(data_dir: str) -> None:
+    data = pathlib.Path(data_dir)
+    file_path = data.joinpath('fund_prices.parq')
     prices = pd.read_parquet(file_path)
-    file_path = project.joinpath('data', 'monthly_prices.csv')
+    file_path = data.joinpath('monthly_prices.csv')
     get_longest_series(get_monthly_prices(prices)).to_csv(file_path)
+
+
+def clean_from_monthly_prices_raw(file_path: str, min_periods: int = 36) -> None:
+    data = pd.read_csv(file_path)
+    data.dropna(subset=['aafmCategory'], inplace=True)  # don't want funds w/o category
+    data = filter_min_history(data, min_periods)
+    data = filter_constant_prices(data)
+    data = get_longest_series2(data)
+    new_cat = data['aafmCategory'].apply(lambda x: lookup(x, NEW_CATEGORIES))
+    data.insert(loc=8, column='userCategory', value=new_cat)
+    data.to_csv('../data/FundDataWithMonthlyPrices_v3.csv', index=False)
+
+if __name__ == '__main__':
+    clean_from_monthly_prices_raw('../data/FundDatawithMonthlyPrices_v2_raw.csv')

@@ -3,15 +3,13 @@ from typing import Dict, Union
 import numpy as np
 import pandas as pd
 
-data = pd.read_csv('data/FundDatawithMonthlyPrices.csv')
-
 
 def get_static_data(data: pd.DataFrame) -> pd.DataFrame:
-    return data.iloc[:, 1:10]
+    return data.iloc[:, 0:9]
 
 
 def get_price_data(data: pd.DataFrame) -> pd.DataFrame:
-    return data.iloc[:, 14:]
+    return data.iloc[:, 9:]
 
 
 def get_return_data(prices: pd.DataFrame) -> pd.DataFrame:
@@ -42,3 +40,13 @@ def fill_series(na_series: pd.Series, fill_series: pd.Series) -> pd.Series:
 
 def fill_na(dataset: pd.DataFrame, means: Dict) -> pd.DataFrame:
     return dataset.apply(lambda row: fill_series(row, means[row.loc['aafmCategory']]), axis=1)
+
+
+if __name__ =='__main__':
+    data = pd.read_csv('../data/FundDataWithMonthlyPrices_v3.csv')
+    static = get_static_data(data)
+    prices = get_price_data(data)
+    returns = get_return_data(prices)
+    dataset = make_dataset(static, returns)
+    cat_means = get_category_means(dataset)
+    fill_na(dataset, cat_means).to_csv('../data/monthly_returns.csv')
