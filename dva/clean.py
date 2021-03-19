@@ -110,6 +110,15 @@ def lookup(val: str, cats: Dict[str, List[str]]) -> str:
         print(f'{val} not in lookup.')
 
 
+def get_fund_flows_2020(parq_file: str) -> pd.DataFrame:
+    aum = pd.read_parquet(parq_file)
+    aum.set_index('fecha', inplace=True)
+    aum.index = pd.to_datetime(aum.index)
+    assets = aum.loc['2020']
+    assets['fundRUNSeries'] = assets['fundRUN'] + assets['fundSeries']
+    return assets.groupby('fundRUNSeries').mean()
+
+
 def clean_from_parquet(data_dir: str) -> None:
     data = pathlib.Path(data_dir)
     file_path = data.joinpath('fund_prices.parq')
@@ -130,3 +139,4 @@ def clean_from_monthly_prices_raw(file_path: str, min_periods: int = 36) -> None
 
 if __name__ == '__main__':
     clean_from_monthly_prices_raw('../data/FundDatawithMonthlyPrices_v2_raw.csv')
+    get_fund_flows_2020('../data/fund_flows.parq').to_csv('../data/FundDataRecentFlows.csv')

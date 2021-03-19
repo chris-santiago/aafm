@@ -49,4 +49,4 @@ if __name__ =='__main__':
     returns = get_return_data(prices)
     dataset = make_dataset(static, returns)
     cat_means = get_category_means(dataset)
-    fill_na(dataset, cat_means).to_csv('../data/monthly_returns.csv')
+    fill_na(dataset, cat_means).to_csv('../data/monthly_returns.csv', index=False)
