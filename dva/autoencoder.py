@@ -6,18 +6,15 @@ from tensorflow.keras.models import Model
 
 
 class Autoencoder(Model):
-    def __init__(self, nodes: Tuple[int]):
+    def __init__(self, nodes: int):
         super().__init__()
         self.nodes = nodes
         self.encoder = tf.keras.Sequential([
-            layers.Dense(self.nodes[0], activation='relu'),
-            # layers.Dropout(0.2),
-            layers.Dense(self.nodes[1], activation='relu')
+            layers.Dense(self.nodes, activation='relu'),
+
         ])
         self.decoder = tf.keras.Sequential([
-            layers.Dense(self.nodes[0], activation='relu'),
-            # layers.Dropout(0.2),
-            layers.Dense(64, activation='sigmoid')
+            layers.Dense(75, activation='sigmoid')
         ])
 
     def call(self, inputs, training=None, mask=None):

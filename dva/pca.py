@@ -25,7 +25,7 @@ class PCADetector:
             ]
         )
         self.projected = pl.inverse_transform(pl.fit_transform(df))
-        return self.projected
+        return pl.named_steps['scaler'].inverse_transform(self.projected)
 
     def get_loss(self) -> Union[pd.Series, np.ndarray]:
         return np.sum((self.original - self.projected) ** 2, axis=1)
@@ -43,28 +43,3 @@ class PCADetector:
         losses = self.get_loss()
         self.data['pca_anomaly'] = ((scores > 0.85) & (losses > floor)).astype(int)
         return self.data
-
-
-
-
-def get_projection(data: pd.DataFrame) -> Union[pd.Series, np.ndarray]:
-    df = data.copy()
-    df_num = df.iloc[:, 9:-5]
-    pl = Pipeline(
-        steps=[
-            ('scaler', StandardScaler()),
-            ('pca', PCA(n_components=0.95))
-        ]
-    )
-    return pl.inverse_transform(pl.fit_transform(df_num))
-
-
-def get_loss(
-        original: Union[pd.Series, np.ndarray], projected: Union[pd.Series, np.ndarray]
-) -> Union[pd.Series, np.ndarray]:
-    return np.sum((original - projected) ** 2, axis=1)
-
-
-def get_score(loss: Union[pd.Series, np.ndarray]) -> Union[pd.Series, np.ndarray]:
-    return (loss - np.min(loss)) / (np.max(loss) - np.min(loss))
-

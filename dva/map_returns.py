@@ -40,6 +40,14 @@ def map_all_by_group(data: pd.DataFrame, method: str) -> pd.DataFrame:
     return pd.concat(all_data)
 
 
+def join_fund_flows(data: pd.DataFrame, flows: str) -> pd.DataFrame:
+    flows = pd.read_csv(flows)
+    return data.merge(flows, on='fundRUNSeries')
+
+
 if __name__ == '__main__':
     data = pd.read_csv('../data/monthly_returns.csv')
     data.fillna(0, inplace=True)
+    mapped = map_to_lower_dim(data, 'tsne')
+    joined = join_fund_flows(mapped, '../data/FundDataRecentFlows.csv')
+    joined.to_csv('../data/FundDataWithMonthlyReturnsTSNE-single.csv', index=False)
