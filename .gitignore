@@ -1,6 +1,6 @@
 .idea/
 .ipynb_checkpoints/
 /data/raw/
+/.vs/*
 *.docx
 *.pptx
-/.vs/*
