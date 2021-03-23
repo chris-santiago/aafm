@@ -3,5 +3,9 @@ dask[complete]
 pyarrow
 jupyterlab
 scikit-learn
+seaborn
+tensorflow
+bokeh
 xlrd
 openpyxl
+
