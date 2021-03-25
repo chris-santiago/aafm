@@ -44,3 +44,6 @@ Extract -> Cleaned_Explore -> Raw_Explore -> Raw_Clean -> Monthly_Returns -> PCA
 	- Flag anomalies with marker overlay
 	- Include `fundName`, `aafmCategory`, `netPatrimony`, `ann_return`, `ann_stdev` and `dist_anomaly` in tooltip
 
+## New References
+
+van der Maaten, L. & Hinton, G. (2008). *Visiualizing data using t-SNE*. Journal of Machine Learning Research, 9(Nov):2579-2605.
