@@ -10,9 +10,27 @@ def get_cagr(series: pd.Series) -> pd.Series:
     return (end/start) ** (1/(n/12)) - 1
 
 
-def get_ann_std(series: pd.Series) -> pd.Series:
+def check_series(series):
+    return (len(series) - series.isna().sum()) < 6
+
+
+def get_ann_return(series):
+    if check_series(series):
+        return np.nan
+    return get_cagr(series)
+
+
+def get_ann_std(series):
+    if check_series(series):
+        return np.nan
     series = series.dropna()
     return series.pct_change().std() * np.sqrt(12)
+
+
+def geo_mean(series):
+    n = len(series)
+    arr = np.ones(n)
+    return np.product(series + arr) ** (1/n) - 1
 
 
 def add_perf_metrics(data: pd.DataFrame) -> pd.DataFrame:
