@@ -27,3 +27,6 @@ we used tableau as a viaualization tool for our project.This helps the users to 
 2.	AAFM Category Fund Summary 
 3.	Similar Chilean Mutual Funds 
 4.	Modern Portfolio Theory (MPT) 
+
+DEMO VIDEO: 
+https://www.youtube.com/watch?v=eKTFBlOoYdo
