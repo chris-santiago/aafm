@@ -42,5 +42,5 @@ def add_perf_metrics(data: pd.DataFrame) -> pd.DataFrame:
 
 
 if __name__ == '__main__':
-    data = pd.read_csv('../data/FundDataWithMonthlyPrices_v3.csv')
-    add_perf_metrics(data).to_csv('../data/FundDataPerfandRisk.csv', index=False)
+    data = pd.read_csv('../../_final_report/data/FundDataWithMonthlyPrices_v3.csv')
+    add_perf_metrics(data).to_csv('../../_final_report/data/FundDataPerfandRisk.csv', index=False)

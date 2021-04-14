@@ -9,19 +9,22 @@ PROJECT_DIR = HERE.parent
 DATA_DIR = PROJECT_DIR.joinpath('data')
 RAW_FILES = DATA_DIR.joinpath('raw')
 
-COLS = {
-    'fund_prices': [
-        'fundName', 'fundSeries', 'installmentValue', 'bloombergCode', 'fecha'
-    ],
-    'fund_data': [
-        'fundRUN', 'fundName', 'fundSeries', 'bloombergCode', 'APV', 'aafmCategory', 'svsCategory',
-        'svsCategoryId', 'currency'
-    ],
-    'fund_flows': [
-        'fundRUN', 'fundName', 'fundSeries', 'bloombergCode', 'netPatrimony', 'providedFlow',
-        'rescuedFlow', 'fecha'
-    ],
-}
+
+def get_cols():
+    return {
+        'fund_prices': [
+            'fundName', 'fundSeries', 'installmentValue', 'bloombergCode', 'fecha'
+        ],
+        'fund_data': [
+            'fundRUN', 'fundName', 'fundSeries', 'bloombergCode', 'APV', 'aafmCategory',
+            'svsCategory',
+            'svsCategoryId', 'currency'
+        ],
+        'fund_flows': [
+            'fundRUN', 'fundName', 'fundSeries', 'bloombergCode', 'netPatrimony', 'providedFlow',
+            'rescuedFlow', 'fecha'
+        ],
+    }
 
 
 def check_files(dir_path):
@@ -44,15 +47,14 @@ def get_subset(data, columns):
         return sub.compute()
 
 
-def main():
-    raw_files = DATA_DIR.joinpath('raw')
+def raw_to_parq(raw_files, data_dir):
     check_files(raw_files)
     data = dd.read_csv(f'{raw_files}/*.csv', parse_dates=['fecha'])
-    for name, columns in COLS.items():
+    for name, columns in get_cols().items():
         fn = f'{name}.parq'
         df = get_subset(data, columns)
-        df.to_parquet(DATA_DIR.joinpath(fn), compression='gzip')
+        df.to_parquet(data_dir.joinpath(fn), compression='gzip')
 
 
 if __name__ == '__main__':
-    main()
+    raw_to_parq(RAW_FILES, DATA_DIR)
