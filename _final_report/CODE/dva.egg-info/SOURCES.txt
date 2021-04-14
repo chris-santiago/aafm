@@ -1,0 +1,17 @@
+MANIFEST.in
+setup.py
+dva/__init__.py
+dva/autoencoder.py
+dva/clean.py
+dva/distance_anomalies.py
+dva/extract.py
+dva/fund_performance.py
+dva/fund_prices.py
+dva/fund_returns.py
+dva/get_data.py
+dva/map_returns.py
+dva/pca.py
+dva.egg-info/PKG-INFO
+dva.egg-info/SOURCES.txt
+dva.egg-info/dependency_links.txt
+dva.egg-info/top_level.txt
