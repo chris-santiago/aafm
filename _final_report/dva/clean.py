@@ -3,7 +3,9 @@ from typing import Dict, List
 import pandas as pd
 import pathlib
 
-NEW_CATEGORIES = {
+
+def get_user_categories():
+    return {
     'International Equity': [
         'Accionario America Latina', 'Accionario Asia Pacifico', 'Accionario Brasil',
         'Accionario Desarrollado', 'Accionario EEUU', 'Accionario Europa Desarrollado',
@@ -127,15 +129,17 @@ def clean_from_parquet(data_dir: str) -> None:
     get_longest_series(get_monthly_prices(prices)).to_csv(file_path)
 
 
-def clean_from_monthly_prices_raw(file_path: str, min_periods: int = 36) -> None:
-    data = pd.read_csv(file_path)
+def clean_from_monthly_prices_raw(data: pd.DataFrame, min_periods: int = 36) -> None:
+    data.reset_index(inplace=True)
     data.dropna(subset=['aafmCategory'], inplace=True)  # don't want funds w/o category
+    data.insert(loc=0, column='fundRUNSeries', value=data['fundRUN'] + data['fundSeries'])
     data = filter_min_history(data, min_periods)
     data = filter_constant_prices(data)
     data = get_longest_series2(data)
-    new_cat = data['aafmCategory'].apply(lambda x: lookup(x, NEW_CATEGORIES))
+    new_cat = data['aafmCategory'].apply(lambda x: lookup(x, get_user_categories()))
     data.insert(loc=8, column='userCategory', value=new_cat)
-    data.to_csv('../data/FundDataWithMonthlyPrices_v3.csv', index=False)
+    return data
+    # data.to_csv('../data/FundDataWithMonthlyPrices_v3.csv', index=False)
 
 if __name__ == '__main__':
     clean_from_monthly_prices_raw('../data/FundDatawithMonthlyPrices_v2_raw.csv')

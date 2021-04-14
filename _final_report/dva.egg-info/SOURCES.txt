@@ -1,4 +1,9 @@
-README.md
+.DS_Store
+Chilean Mutual Funds Project FINAL 4_06_21.twbx
+MANIFEST.in
+README.txt
+process.md
+requirements.txt
 setup.py
 dva/__init__.py
 dva/autoencoder.py

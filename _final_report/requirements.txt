@@ -8,4 +8,5 @@ tensorflow
 bokeh
 xlrd
 openpyxl
+tqdm
 

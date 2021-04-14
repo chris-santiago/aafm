@@ -1,3 +1,4 @@
+import os
 import pathlib
 
 from setuptools import setup, find_packages
@@ -21,5 +22,11 @@ def install_package():
     )
 
 
+def initialize():
+    filename = HERE.joinpath('dva', 'dir_setup.py')
+    os.system(f'python {str(filename)}')
+
+
 if __name__ == '__main__':
     install_package()
+    initialize()
