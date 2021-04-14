@@ -46,7 +46,7 @@ def join_fund_flows(data: pd.DataFrame, flows: str) -> pd.DataFrame:
 
 
 if __name__ == '__main__':
-    data = pd.read_csv('../data/monthly_returns.csv')
+    data = pd.read_csv('../../_final_report/data/monthly_returns.csv')
     data.fillna(0, inplace=True)
     mapped = map_to_lower_dim(data, 'tsne')
     joined = join_fund_flows(mapped, '../data/FundDataRecentFlows.csv')

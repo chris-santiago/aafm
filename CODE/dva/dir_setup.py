@@ -16,8 +16,8 @@ def initialize():
         new_dir = AAFM_DIR.joinpath(*d)
         pathlib.Path.mkdir(new_dir, exist_ok=True, parents=True)
 
-    for notebook in ['main.ipynb']:
-        file = HERE.joinpath(notebook)
+    for item in ['main.ipynb', 'chilean_funds_dashboard.twbx']:
+        file = HERE.joinpath(item)
         dest_path = AAFM_DIR.joinpath(file.name)
         shutil.copy(file, dest_path)
 

@@ -43,10 +43,10 @@ def fill_na(dataset: pd.DataFrame, means: Dict) -> pd.DataFrame:
 
 
 if __name__ =='__main__':
-    data = pd.read_csv('../data/FundDataWithMonthlyPrices_v3.csv')
+    data = pd.read_csv('../../_final_report/data/FundDataWithMonthlyPrices_v3.csv')
     static = get_static_data(data)
     prices = get_price_data(data)
     returns = get_return_data(prices)
     dataset = make_dataset(static, returns)
     cat_means = get_category_means(dataset)
-    fill_na(dataset, cat_means).to_csv('../data/monthly_returns.csv', index=False)
+    fill_na(dataset, cat_means).to_csv('../../_final_report/data/monthly_returns.csv', index=False)

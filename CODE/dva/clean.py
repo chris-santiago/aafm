@@ -143,4 +143,5 @@ def clean_from_monthly_prices_raw(data: pd.DataFrame, min_periods: int = 36) -> 
 
 if __name__ == '__main__':
     clean_from_monthly_prices_raw('../data/FundDatawithMonthlyPrices_v2_raw.csv')
-    get_fund_flows_2020('../data/fund_flows.parq').to_csv('../data/FundDataRecentFlows.csv')
+    get_fund_flows_2020('../../_final_report/data/fund_flows.parq').to_csv(
+        '../../_final_report/data/FundDataRecentFlows.csv')
