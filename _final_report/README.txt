@@ -31,10 +31,10 @@ Jupyter Notebooks or VS Code Notebooks can be found at https://jupyter.org/insta
 Tableau can be found at https://www.tableau.com/products/desktop/download. Tableau is a paid for product, but they do provide educational discounts, etc., as well as free 2-week trial.
 
 EXECUTION:
-Run "python setup.py install” from a terminal, in the CODE directory.This will install required Python dependencies, create an aafm_work directory in the user’s home directory, and a few other installation requirements.
-Once installation has been completed, navigate to your user’s home directory, on the aafm_work directory, and start the main.ipynb Python notebook.
-main.ipynb is a condensed aggregate of our entire process (if you’re interested in seeing more of our code open the dva package), which scrapes data from the web, extracts/transforms/stores our data as several CSV files, preparing the data from consumption from Tableau.
-Once you’ve run main.ipynb you can open the Tableau dashboard Chilean_fundsdashboard.twbx, found in the same directory as main.ipynb.
+Run "python setup.py install" from a terminal, in the CODE directory.This will install required Python dependencies, create an aafm_work directory in the user's home directory, and a few other installation requirements.
+Once installation has been completed, navigate to your user's home directory, on the aafm_work directory, and start the main.ipynb Python notebook.
+main.ipynb is a condensed aggregate of our entire process (if you're interested in seeing more of our code open the dva package), which scrapes data from the web, extracts/transforms/stores our data as several CSV files, preparing the data from consumption from Tableau.
+Once you've run main.ipynb you can open the Tableau dashboard Chilean_fundsdashboard.twbx, found in the same directory as main.ipynb.
 For a quick overview of the Tableau dashboard, visit the YouTube video below.
 
 DEMO VIDEO: 
