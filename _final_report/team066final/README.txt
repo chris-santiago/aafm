@@ -4,15 +4,15 @@ This software package contains source code for getting started with an Enhanced 
 
 This project has 4 main parts:
 
-Step 1 Data Scraping – First we scrape publicly available mutual fund data from aafm.cl. We then store this in a raw format for further processing. This step is purely about data collection.
+Step 1 Data Scraping â€“ First we scrape publicly available mutual fund data from aafm.cl. We then store this in a raw format for further processing. This step is purely about data collection.
 
-Step 2 Data Splitting and Compression – We take the raw data collected in a step one, split it into constituent parts, then store it in an optimized way using Parquet. This enables us to have a compressed data source that is easier to process in subsequent steps.
+Step 2 Data Splitting and Compression â€“ We take the raw data collected in a step one, split it into constituent parts, then store it in an optimized way using Parquet. This enables us to have a compressed data source that is easier to process in subsequent steps.
 
-Step 3 Clean and Transformation – We take the previously split and compressed data, clean it as appropriate, and merge parts of it together, and perform other processes such as dimensionality reduction to enable better consumption during machine learning.
+Step 3 Clean and Transformation â€“ We take the previously split and compressed data, clean it as appropriate, and merge parts of it together, and perform other processes such as dimensionality reduction to enable better consumption during machine learning.
 
-Step 4 Analysis/Machine Learning – This is the last processing step but is by far the largest. We take our recently cleaned data and run it through several machine learning algorithms such as t-SNE, K-means for clustering, anomaly detection, calculating efficiency frontiers, etc.
+Step 4 Analysis/Machine Learning â€“ This is the last processing step but is by far the largest. We take our recently cleaned data and run it through several machine learning algorithms such as t-SNE, K-means for clustering, anomaly detection, calculating efficiency frontiers, etc.
 
-Step 5 Visualization – Using Tableau, we enable users to quickly view funds and glean their own observations. Our workbook contains four primary dashboards.
+Step 5 Visualization â€“ Using Tableau, we enable users to quickly view funds and glean their own observations. Our workbook contains four primary dashboards.
 
 	1) Chilean Mutual Funds Anomaly Detection: This dashboard enables investors to quickly view a self-organized map of the available funds, observe outliers and fund misclassifications, and compare funds to their proper classifications.
 

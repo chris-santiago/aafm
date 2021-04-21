@@ -10,6 +10,7 @@ def get_user_categories():
         'Accionario America Latina', 'Accionario Asia Pacifico', 'Accionario Brasil',
         'Accionario Desarrollado', 'Accionario EEUU', 'Accionario Europa Desarrollado',
         'Accionario Pais', 'Accionario Países MILA',
+        'Inversionistas Calificados Accionario Internacional',
     ],
     'Emerging Equity': [
         'Accionario Asia Emergente', 'Accionario Emergente', 'Accionario Europa Emergente',
@@ -40,7 +41,8 @@ def get_user_categories():
         'Fondos de Deuda > 365 Dias Nacional, Inversión en Pesos',
         'Fondos de Deuda > 365 Dias Nacional, Inversión en UF < 3 años',
         'Fondos de Deuda > 365 Dias Orig. Flex', 'Inversionistas Calificados Títulos de Deuda',
-    ]
+        'Estructurado No Accionario',
+    ],
 }
 
 
