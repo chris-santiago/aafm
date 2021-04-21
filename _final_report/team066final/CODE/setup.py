@@ -21,7 +21,7 @@ def install_package():
         version=VERSION,
         description=DESCRIPTION,
         packages=find_packages(),
-        install_require=INSTALL_REQUIRES,
+        install_requires=INSTALL_REQUIRES,
         include_package_data=True
     )
 
