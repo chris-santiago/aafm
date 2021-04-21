@@ -13,15 +13,14 @@ RAW_FILES = DATA_DIR.joinpath('raw')
 def get_cols():
     return {
         'fund_prices': [
-            'fundName', 'fundSeries', 'installmentValue', 'bloombergCode', 'fecha'
+            'fundName', 'fundSeries', 'installmentValue', 'fecha'
         ],
         'fund_data': [
-            'fundRUN', 'fundName', 'fundSeries', 'bloombergCode', 'APV', 'aafmCategory',
-            'svsCategory',
+            'fundRUN', 'fundName', 'fundSeries', 'aafmCategory', 'svsCategory',
             'svsCategoryId', 'currency'
         ],
         'fund_flows': [
-            'fundRUN', 'fundName', 'fundSeries', 'bloombergCode', 'netPatrimony', 'providedFlow',
+            'fundRUN', 'fundName', 'fundSeries', 'netPatrimony', 'providedFlow',
             'rescuedFlow', 'fecha'
         ],
     }

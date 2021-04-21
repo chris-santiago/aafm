@@ -9,4 +9,3 @@ bokeh
 xlrd
 openpyxl
 tqdm
-

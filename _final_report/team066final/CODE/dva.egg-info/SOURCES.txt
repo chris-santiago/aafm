@@ -14,4 +14,5 @@ dva/pca.py
 dva.egg-info/PKG-INFO
 dva.egg-info/SOURCES.txt
 dva.egg-info/dependency_links.txt
+dva.egg-info/requires.txt
 dva.egg-info/top_level.txt
